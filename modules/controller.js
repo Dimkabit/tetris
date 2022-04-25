@@ -13,7 +13,7 @@ export class Controller {
 			if(event.code === codeKey) {
 				this.view.init();
 				this.start();
-			}
+			} 
 		})
 	}
 

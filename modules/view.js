@@ -27,8 +27,8 @@ export class View {
 		preview.innerHTML = 'Press to start';
 		preview.style.cssText = `
 			border: 1px solid black;
-			font-size: 18px;
-			padding: 10px;
+			font-size: 16px;
+			padding: 5px;
 			text-align: center;
 			grid-column: 1 / 3;
 
@@ -50,10 +50,9 @@ export class View {
 	createBlockScore() {
 		const scoreBlock = document.createElement('div');
 		scoreBlock.style.cssText = `
-			border: 2px solid black;
-			font-size: 18px
+			font-size: 12px
 			text-align: center;
-			padding: 20px;
+			padding: 5px;
 			grid-area: score;
 		`;
 		const linesElem = document.createElement('p');
@@ -65,7 +64,7 @@ export class View {
 		this.container.append(scoreBlock);
 
 		return (lines, score, level, record) => {
-			linesElem.textContent = `lines: ${lines}`;
+			linesElem.textContent = `lines:  ${lines}`;
 			scoreElem.textContent = `score: ${score}`;
 			levelElem.textContent = `level: ${level}`;
 			recordElem.textContent = `record: ${record}`;
@@ -75,10 +74,9 @@ export class View {
 	createBlockNextTetramino() {
 		const tetraminoBlock = document.createElement('div');
 		tetraminoBlock.style.cssText = `
-			width: ${SIZE_BLOCK * 4 + 10}px;
-			height: ${SIZE_BLOCK * 4 + 10}px;
-			border: 2px solid black;
-			padding: 40px;
+			width: ${SIZE_BLOCK * 3 + 10}px;
+			height: ${SIZE_BLOCK * 3 + 10}px;
+			padding: 20px;
 			grid-area: next;
 			display: flex;
 			align-items: center;
@@ -131,13 +129,6 @@ export class View {
 				arrowBlock.append(downElem)
 
 		this.container.append(arrowBlock);
-
-		/*return (upElem, leftElem, rightElem, downElem) => {
-			upElem.textContent = `>: ${upElem}`;
-			leftElem.textContent = `score: ${leftElem}`;
-			rightElem.textContent = `level: ${rightElem}`;
-			downElem.textContent = `record: ${downElem}`;
-		}*/
 	}
 	
 
