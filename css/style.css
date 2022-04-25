@@ -1,0 +1,578 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic&display=swap");
+@use "sass:math";
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  min-width: 320px;
+}
+
+body {
+  color: #000;
+  line-height: 1;
+  font-family: "Montserrat";
+  font-size: 1.125rem;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input,
+button,
+textarea {
+  font-family: "Montserrat";
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+  color: inherit;
+  background-color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+.lock body {
+  overflow: hidden;
+  -ms-touch-action: none;
+      touch-action: none;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+}
+
+.wrapper > main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.wrapper > * {
+  min-width: 0;
+}
+
+/*
+(i) Стили будут применяться ко 
+всем классам содержащим *__container
+Например header__container, main__container и т.д.
+Снипет (HTML): cnt
+*/
+[class*="__container"] {
+  margin: 0 auto;
+  max-width: 73.125rem;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+@media (max-width: 73.125em) {
+  [class*="__container"] {
+    max-width: 60.625rem;
+  }
+}
+
+@media (max-width: 61.99875em) {
+  [class*="__container"] {
+    max-width: 46.875rem;
+  }
+}
+
+@media (max-width: 47.99875em) {
+  [class*="__container"] {
+    max-width: none;
+  }
+}
+
+[class*="-ibg"] {
+  position: relative;
+}
+
+[class*="-ibg"] img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+[class*="-ibg_contain"] img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+/*
+.icon-menu {
+	display: none;
+	@media (max-width: $mobile) {
+		display: block;
+		position: relative;
+		width: 30px;
+		height: 18px;
+		cursor: pointer;
+		z-index: 5;
+		span,
+		&::before,
+		&::after {
+			content: "";
+			transition: all 0.3s ease 0s;
+			left: 0px;
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			background-color: #000;
+		}
+		&::before {
+			top: 0px;
+		}
+		&::after {
+			bottom: 0px;
+		}
+		span {
+			top: calc(50% - 1px);
+		}
+		.menu-open & {
+			span {
+				transform: scale(0);
+			}
+			&::before {
+				transform: rotate(-45deg);
+				top: calc(50% - 1px);
+			}
+			&::after {
+				transform: rotate(45deg);
+				bottom: calc(50% - 1px);
+			}
+		}
+	}
+}
+*/
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 30px 10px;
+  -webkit-transition: visibility 0.3s ease 0s;
+  transition: visibility 0.3s ease 0s;
+  visibility: hidden;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  align-items: center;
+}
+
+.popup__content {
+  -webkit-transition: -webkit-transform 0.3s ease 0s;
+  transition: -webkit-transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
+  background-color: #eee;
+  padding: 20px;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 20px;
+}
+
+.popup:target {
+  z-index: 150;
+  visibility: visible;
+  overflow: auto;
+  pointer-events: auto;
+}
+
+.popup__close {
+  display: block;
+  text-align: right;
+  padding-right: 0.625rem;
+  font-weight: 600;
+}
+
+.header-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 6.25rem;
+  background: #7FAFF7;
+  border: 0.9375rem solid #C0DBD9;
+  border-top: none;
+}
+
+.header-block__button {
+  padding: 1.90625rem 1.875rem;
+}
+
+.button {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 0.5rem 0.9375rem;
+  background: #A5C7F9;
+  border-radius: 5px;
+  color: #FFFFFF;
+}
+
+/*.main {
+//display: flex;
+
+	// .main__container
+	&__container {
+		display: flex;
+		flex-wrap: wrap;
+		
+	}
+}
+.main-block {
+	
+	border: rem(15) solid #C0DBD9;
+	border-top: none;
+	border-bottom: none;
+	
+	// .main-block__block1
+
+	&__block {
+		display: flex;
+		
+		min-width: rem(390);
+		height: rem(198);
+		background: #8AD191;
+		position: relative;
+		justify-content: center;
+		align-items: center;
+		
+	}
+	&__block._1 {
+		flex: 0 0 200px;
+	}
+	&__block._1
+	// .main-block__block2
+	&__block._2
+
+	// .main-block__block3
+	&__block._3
+
+	// .main-block__block4
+	&__block._4
+
+	// .main-block__block5
+	&__block._5
+}*/
+.main-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.main-block__block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-width: 100%;
+  height: 12.375rem;
+  background: #8AD191;
+}
+
+.main-block__block._1::after {
+  position: absolute;
+  content: '1';
+  color: #FFFFFF;
+  font-size: 3.3125rem;
+  line-height: 62px;
+}
+
+.main-block__block._2::after {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  content: '2';
+  color: #FFFFFF;
+  font-size: 3.3125rem;
+  line-height: 62px;
+}
+
+.main-block__block._3::after {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  content: '3';
+  color: #FFFFFF;
+  font-size: 3.3125rem;
+  line-height: 62px;
+}
+
+.main-block__block._4::after {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  content: '4';
+  color: #FFFFFF;
+  font-size: 3.3125rem;
+  line-height: 62px;
+}
+
+.main-block__block._5::after {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  content: '5';
+  color: #FFFFFF;
+  font-size: 3.3125rem;
+  line-height: 62px;
+}
+
+.block__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background: #88B5BF;
+  border-left: 0.9375rem solid #C0DBD9;
+  border-right: 0.9375rem solid #C0DBD9;
+  gap: 30px;
+  padding: 30px;
+}
+
+.block__block2 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 20%;
+          flex: 1 1 20%;
+  /* отнимем margin и скажем растягиваться */
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  /* чтобы внутренний отступ не влиял когда там будет текст... */
+  min-width: 255px;
+  /* мин. ширина блока, чтобы переносились на другой ряд */
+  height: 190px;
+  background: #0D89B0;
+  /* для красоты */
+}
+
+.footer-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 6.25rem;
+  background: #7FAFF7;
+  border: 0.9375rem solid #C0DBD9;
+  border-bottom: none;
+}
+
+h1 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.game-container {
+  width: 31.25rem;
+  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  gap: 3.125rem;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+      grid-template-areas: 'game score' 'game next' 'game arrow';
+}
+
+.game-area {
+  border: 0.125rem solid black;
+  border-top: none;
+  display: block;
+  margin: 0 auto;
+}
+
+.arrow-block {
+  border: 2px solid black;
+  gap: 0.625rem;
+  padding: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.upElem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 30px;
+  height: 30px;
+  background: gray;
+  border-radius: 50%;
+}
+
+.upElem::after {
+  content: '▲';
+  padding: 1px 0px 0px 6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.leftElem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 30px;
+  height: 30px;
+  background: gray;
+  border-radius: 50%;
+}
+
+.leftElem::after {
+  padding: 1px 0px 0px 6px;
+  content: '◄';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.rightElem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 30px;
+  height: 30px;
+  background: gray;
+  border-radius: 50%;
+}
+
+.rightElem::after {
+  padding: 1px 0px 0px 7px;
+  content: '►';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.downElem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 30px;
+  height: 30px;
+  background: gray;
+  border-radius: 50%;
+}
+
+.downElem::after {
+  padding: 2px 0px 0px 6px;
+  content: '▼';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
